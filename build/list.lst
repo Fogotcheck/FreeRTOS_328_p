@@ -1,0 +1,211 @@
+   1               		.file	"list.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.global	vListInitialise
+  10               	vListInitialise:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 E82F      		mov r30,r24
+  16 0002 F92F      		mov r31,r25
+  17 0004 CF01      		movw r24,r30
+  18 0006 0396      		adiw r24,3
+  19 0008 9283      		std Z+2,r25
+  20 000a 8183      		std Z+1,r24
+  21 000c 2FEF      		ldi r18,lo8(-1)
+  22 000e 3FEF      		ldi r19,lo8(-1)
+  23 0010 3483      		std Z+4,r19
+  24 0012 2383      		std Z+3,r18
+  25 0014 9683      		std Z+6,r25
+  26 0016 8583      		std Z+5,r24
+  27 0018 9087      		std Z+8,r25
+  28 001a 8783      		std Z+7,r24
+  29 001c 1082      		st Z,__zero_reg__
+  30               	/* epilogue start */
+  31 001e 0895      		ret
+  33               	.global	vListInitialiseItem
+  35               	vListInitialiseItem:
+  36               	/* prologue: function */
+  37               	/* frame size = 0 */
+  38               	/* stack size = 0 */
+  39               	.L__stack_usage = 0
+  40 0020 FC01      		movw r30,r24
+  41 0022 1186      		std Z+9,__zero_reg__
+  42 0024 1086      		std Z+8,__zero_reg__
+  43               	/* epilogue start */
+  44 0026 0895      		ret
+  46               	.global	vListInsertEnd
+  48               	vListInsertEnd:
+  49 0028 CF93      		push r28
+  50 002a DF93      		push r29
+  51               	/* prologue: function */
+  52               	/* frame size = 0 */
+  53               	/* stack size = 2 */
+  54               	.L__stack_usage = 2
+  55 002c 282F      		mov r18,r24
+  56 002e 392F      		mov r19,r25
+  57 0030 E62F      		mov r30,r22
+  58 0032 F72F      		mov r31,r23
+  59 0034 D901      		movw r26,r18
+  60 0036 1196      		adiw r26,1
+  61 0038 CD91      		ld r28,X+
+  62 003a DC91      		ld r29,X
+  63 003c D383      		std Z+3,r29
+  64 003e C283      		std Z+2,r28
+  65 0040 8C81      		ldd r24,Y+4
+  66 0042 9D81      		ldd r25,Y+5
+  67 0044 9583      		std Z+5,r25
+  68 0046 8483      		std Z+4,r24
+  69 0048 8C81      		ldd r24,Y+4
+  70 004a 9D81      		ldd r25,Y+5
+  71 004c DC01      		movw r26,r24
+  72 004e 1396      		adiw r26,2+1
+  73 0050 FC93      		st X,r31
+  74 0052 EE93      		st -X,r30
+  75 0054 1297      		sbiw r26,2
+  76 0056 FD83      		std Y+5,r31
+  77 0058 EC83      		std Y+4,r30
+  78 005a 3187      		std Z+9,r19
+  79 005c 2087      		std Z+8,r18
+  80 005e F901      		movw r30,r18
+  81 0060 8081      		ld r24,Z
+  82 0062 8F5F      		subi r24,lo8(-(1))
+  83 0064 8083      		st Z,r24
+  84               	/* epilogue start */
+  85 0066 DF91      		pop r29
+  86 0068 CF91      		pop r28
+  87 006a 0895      		ret
+  89               	.global	vListInsert
+  91               	vListInsert:
+  92 006c CF93      		push r28
+  93 006e DF93      		push r29
+  94               	/* prologue: function */
+  95               	/* frame size = 0 */
+  96               	/* stack size = 2 */
+  97               	.L__stack_usage = 2
+  98 0070 482F      		mov r20,r24
+  99 0072 592F      		mov r21,r25
+ 100 0074 C62F      		mov r28,r22
+ 101 0076 D72F      		mov r29,r23
+ 102 0078 2881      		ld r18,Y
+ 103 007a 3981      		ldd r19,Y+1
+ 104 007c FA01      		movw r30,r20
+ 105 007e 3396      		adiw r30,3
+ 106 0080 2F3F      		cpi r18,-1
+ 107 0082 3207      		cpc r19,r18
+ 108 0084 01F0      		breq .L9
+ 109               	.L7:
+ 110 0086 DF01      		movw r26,r30
+ 111 0088 0280      		ldd __tmp_reg__,Z+2
+ 112 008a F381      		ldd r31,Z+3
+ 113 008c E02D      		mov r30,__tmp_reg__
+ 114 008e 8081      		ld r24,Z
+ 115 0090 9181      		ldd r25,Z+1
+ 116 0092 2817      		cp r18,r24
+ 117 0094 3907      		cpc r19,r25
+ 118 0096 00F4      		brsh .L7
+ 119               	.L6:
+ 120 0098 1296      		adiw r26,2
+ 121 009a ED91      		ld r30,X+
+ 122 009c FC91      		ld r31,X
+ 123 009e 1397      		sbiw r26,2+1
+ 124 00a0 FB83      		std Y+3,r31
+ 125 00a2 EA83      		std Y+2,r30
+ 126 00a4 D583      		std Z+5,r29
+ 127 00a6 C483      		std Z+4,r28
+ 128 00a8 BD83      		std Y+5,r27
+ 129 00aa AC83      		std Y+4,r26
+ 130 00ac 1396      		adiw r26,2+1
+ 131 00ae DC93      		st X,r29
+ 132 00b0 CE93      		st -X,r28
+ 133 00b2 1297      		sbiw r26,2
+ 134 00b4 5987      		std Y+9,r21
+ 135 00b6 4887      		std Y+8,r20
+ 136 00b8 FA01      		movw r30,r20
+ 137 00ba 8081      		ld r24,Z
+ 138 00bc 8F5F      		subi r24,lo8(-(1))
+ 139 00be 8083      		st Z,r24
+ 140               	/* epilogue start */
+ 141 00c0 DF91      		pop r29
+ 142 00c2 CF91      		pop r28
+ 143 00c4 0895      		ret
+ 144               	.L9:
+ 145 00c6 FA01      		movw r30,r20
+ 146 00c8 A781      		ldd r26,Z+7
+ 147 00ca B085      		ldd r27,Z+8
+ 148 00cc 00C0      		rjmp .L6
+ 150               	.global	uxListRemove
+ 152               	uxListRemove:
+ 153 00ce CF93      		push r28
+ 154 00d0 DF93      		push r29
+ 155               	/* prologue: function */
+ 156               	/* frame size = 0 */
+ 157               	/* stack size = 2 */
+ 158               	.L__stack_usage = 2
+ 159 00d2 E82F      		mov r30,r24
+ 160 00d4 F92F      		mov r31,r25
+ 161 00d6 A085      		ldd r26,Z+8
+ 162 00d8 B185      		ldd r27,Z+9
+ 163 00da C281      		ldd r28,Z+2
+ 164 00dc D381      		ldd r29,Z+3
+ 165 00de 8481      		ldd r24,Z+4
+ 166 00e0 9581      		ldd r25,Z+5
+ 167 00e2 9D83      		std Y+5,r25
+ 168 00e4 8C83      		std Y+4,r24
+ 169 00e6 C481      		ldd r28,Z+4
+ 170 00e8 D581      		ldd r29,Z+5
+ 171 00ea 8281      		ldd r24,Z+2
+ 172 00ec 9381      		ldd r25,Z+3
+ 173 00ee 9B83      		std Y+3,r25
+ 174 00f0 8A83      		std Y+2,r24
+ 175 00f2 1196      		adiw r26,1
+ 176 00f4 8D91      		ld r24,X+
+ 177 00f6 9C91      		ld r25,X
+ 178 00f8 1297      		sbiw r26,1+1
+ 179 00fa 8E17      		cp r24,r30
+ 180 00fc 9F07      		cpc r25,r31
+ 181 00fe 01F0      		breq .L12
+ 182               	.L11:
+ 183 0100 1186      		std Z+9,__zero_reg__
+ 184 0102 1086      		std Z+8,__zero_reg__
+ 185 0104 8C91      		ld r24,X
+ 186 0106 8150      		subi r24,lo8(-(-1))
+ 187 0108 8C93      		st X,r24
+ 188 010a 8C91      		ld r24,X
+ 189               	/* epilogue start */
+ 190 010c DF91      		pop r29
+ 191 010e CF91      		pop r28
+ 192 0110 0895      		ret
+ 193               	.L12:
+ 194 0112 8481      		ldd r24,Z+4
+ 195 0114 9581      		ldd r25,Z+5
+ 196 0116 1296      		adiw r26,1+1
+ 197 0118 9C93      		st X,r25
+ 198 011a 8E93      		st -X,r24
+ 199 011c 1197      		sbiw r26,1
+ 200 011e 00C0      		rjmp .L11
+ 202               		.ident	"GCC: (GNU) 12.2.0"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 list.c
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:2      *ABS*:000000000000003e __SP_H__
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:3      *ABS*:000000000000003d __SP_L__
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:4      *ABS*:000000000000003f __SREG__
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:5      *ABS*:0000000000000000 __tmp_reg__
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:6      *ABS*:0000000000000001 __zero_reg__
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:10     .text:0000000000000000 vListInitialise
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:35     .text:0000000000000020 vListInitialiseItem
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:48     .text:0000000000000028 vListInsertEnd
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:91     .text:000000000000006c vListInsert
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:152    .text:00000000000000ce uxListRemove
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:144    .text:00000000000000c6 .L9
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:109    .text:0000000000000086 .L7
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:119    .text:0000000000000098 .L6
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:193    .text:0000000000000112 .L12
+C:\Users\win10\AppData\Local\Temp\ccq3XzcV.s:182    .text:0000000000000100 .L11
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,98 @@
+   1               		.file	"config.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.global	led_init
+  10               	led_init:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 259A      		sbi 0x4,5
+  16 0002 2D9A      		sbi 0x5,5
+  17               	/* epilogue start */
+  18 0004 0895      		ret
+  20               	.global	led_togle
+  22               	led_togle:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	/* stack size = 0 */
+  26               	.L__stack_usage = 0
+  27 0006 85B1      		in r24,0x5
+  28 0008 90E2      		ldi r25,lo8(32)
+  29 000a 8927      		eor r24,r25
+  30 000c 85B9      		out 0x5,r24
+  31               	/* epilogue start */
+  32 000e 0895      		ret
+  34               	.global	global_interrupts_init
+  36               	global_interrupts_init:
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39               	/* stack size = 0 */
+  40               	.L__stack_usage = 0
+  41               	/* #APP */
+  42               	 ;  44 "components\config.c" 1
+  43 0010 7894      		sei
+  44               	 ;  0 "" 2
+  45               	/* #NOAPP */
+  46 0012 8FB7      		in r24,__SREG__
+  47 0014 8093 0000 		sts c_sreg,r24
+  48               	/* epilogue start */
+  49 0018 0895      		ret
+  51               	.global	interrupts_cli
+  53               	interrupts_cli:
+  54               	/* prologue: function */
+  55               	/* frame size = 0 */
+  56               	/* stack size = 0 */
+  57               	.L__stack_usage = 0
+  58 001a 8FB7      		in r24,__SREG__
+  59 001c 8093 0000 		sts c_sreg,r24
+  60               	/* #APP */
+  61               	 ;  50 "components\config.c" 1
+  62 0020 F894      		cli
+  63               	 ;  0 "" 2
+  64               	/* #NOAPP */
+  65               	/* epilogue start */
+  66 0022 0895      		ret
+  68               	.global	interrupts_sei
+  70               	interrupts_sei:
+  71               	/* prologue: function */
+  72               	/* frame size = 0 */
+  73               	/* stack size = 0 */
+  74               	.L__stack_usage = 0
+  75 0024 8091 0000 		lds r24,c_sreg
+  76 0028 8FBF      		out __SREG__,r24
+  77               	/* epilogue start */
+  78 002a 0895      		ret
+  80               	.global	__fuse
+  81               		.section	.fuse,"aw"
+  84               	__fuse:
+  85 0000 FF        		.byte	-1
+  86 0001 D7        		.byte	-41
+  87 0002 FC        		.byte	-4
+  88               	.global	c_sreg
+  89               		.section .bss
+  92               	c_sreg:
+  93 0000 00        		.zero	1
+  94               		.ident	"GCC: (GNU) 12.2.0"
+  95               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 config.c
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:2      *ABS*:000000000000003e __SP_H__
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:3      *ABS*:000000000000003d __SP_L__
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:4      *ABS*:000000000000003f __SREG__
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:5      *ABS*:0000000000000000 __tmp_reg__
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:6      *ABS*:0000000000000001 __zero_reg__
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:10     .text:0000000000000000 led_init
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:22     .text:0000000000000006 led_togle
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:36     .text:0000000000000010 global_interrupts_init
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:92     .bss:0000000000000000 c_sreg
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:53     .text:000000000000001a interrupts_cli
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:70     .text:0000000000000024 interrupts_sei
+C:\Users\win10\AppData\Local\Temp\ccCtMkWq.s:84     .fuse:0000000000000000 __fuse
+
+UNDEFINED SYMBOLS
+__do_clear_bss

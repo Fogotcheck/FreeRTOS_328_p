@@ -1,0 +1,129 @@
+   1               		.file	"heap_1.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.global	pvPortMalloc
+  10               	pvPortMalloc:
+  11 0000 0F93      		push r16
+  12 0002 1F93      		push r17
+  13 0004 CF93      		push r28
+  14 0006 DF93      		push r29
+  15               	/* prologue: function */
+  16               	/* frame size = 0 */
+  17               	/* stack size = 4 */
+  18               	.L__stack_usage = 4
+  19 0008 C82F      		mov r28,r24
+  20 000a D92F      		mov r29,r25
+  21 000c 0E94 0000 		call vTaskSuspendAll
+  22 0010 8091 0000 		lds r24,pucAlignedHeap.0
+  23 0014 9091 0000 		lds r25,pucAlignedHeap.0+1
+  24 0018 892B      		or r24,r25
+  25 001a 01F0      		breq .L7
+  26               	.L2:
+  27 001c 00E0      		ldi r16,0
+  28 001e 10E0      		ldi r17,0
+  29 0020 2097      		sbiw r28,0
+  30 0022 01F0      		breq .L3
+  31 0024 8091 0000 		lds r24,xNextFreeByte
+  32 0028 9091 0000 		lds r25,xNextFreeByte+1
+  33 002c C80F      		add r28,r24
+  34 002e D91F      		adc r29,r25
+  35 0030 00E0      		ldi r16,0
+  36 0032 10E0      		ldi r17,0
+  37 0034 CB3D      		cpi r28,-37
+  38 0036 25E0      		ldi r18,5
+  39 0038 D207      		cpc r29,r18
+  40 003a 00F4      		brsh .L3
+  41 003c 00E0      		ldi r16,0
+  42 003e 10E0      		ldi r17,0
+  43 0040 8C17      		cp r24,r28
+  44 0042 9D07      		cpc r25,r29
+  45 0044 00F4      		brsh .L3
+  46 0046 0091 0000 		lds r16,pucAlignedHeap.0
+  47 004a 1091 0000 		lds r17,pucAlignedHeap.0+1
+  48 004e 080F      		add r16,r24
+  49 0050 191F      		adc r17,r25
+  50 0052 D093 0000 		sts xNextFreeByte+1,r29
+  51 0056 C093 0000 		sts xNextFreeByte,r28
+  52               	.L3:
+  53 005a 0E94 0000 		call xTaskResumeAll
+  54 005e C801      		movw r24,r16
+  55               	/* epilogue start */
+  56 0060 DF91      		pop r29
+  57 0062 CF91      		pop r28
+  58 0064 1F91      		pop r17
+  59 0066 0F91      		pop r16
+  60 0068 0895      		ret
+  61               	.L7:
+  62 006a 80E0      		ldi r24,lo8(ucHeap)
+  63 006c 90E0      		ldi r25,hi8(ucHeap)
+  64 006e 9093 0000 		sts pucAlignedHeap.0+1,r25
+  65 0072 8093 0000 		sts pucAlignedHeap.0,r24
+  66 0076 00C0      		rjmp .L2
+  68               	.global	vPortFree
+  70               	vPortFree:
+  71               	/* prologue: function */
+  72               	/* frame size = 0 */
+  73               	/* stack size = 0 */
+  74               	.L__stack_usage = 0
+  75               	/* epilogue start */
+  76 0078 0895      		ret
+  78               	.global	vPortInitialiseBlocks
+  80               	vPortInitialiseBlocks:
+  81               	/* prologue: function */
+  82               	/* frame size = 0 */
+  83               	/* stack size = 0 */
+  84               	.L__stack_usage = 0
+  85 007a 1092 0000 		sts xNextFreeByte+1,__zero_reg__
+  86 007e 1092 0000 		sts xNextFreeByte,__zero_reg__
+  87               	/* epilogue start */
+  88 0082 0895      		ret
+  90               	.global	xPortGetFreeHeapSize
+  92               	xPortGetFreeHeapSize:
+  93               	/* prologue: function */
+  94               	/* frame size = 0 */
+  95               	/* stack size = 0 */
+  96               	.L__stack_usage = 0
+  97 0084 8091 0000 		lds r24,xNextFreeByte
+  98 0088 9091 0000 		lds r25,xNextFreeByte+1
+  99 008c 2BED      		ldi r18,lo8(-37)
+ 100 008e 35E0      		ldi r19,lo8(5)
+ 101 0090 A901      		movw r20,r18
+ 102 0092 481B      		sub r20,r24
+ 103 0094 590B      		sbc r21,r25
+ 104 0096 CA01      		movw r24,r20
+ 105               	/* epilogue start */
+ 106 0098 0895      		ret
+ 108               		.local	pucAlignedHeap.0
+ 109               		.comm	pucAlignedHeap.0,2,1
+ 110               		.local	xNextFreeByte
+ 111               		.comm	xNextFreeByte,2,1
+ 112               		.local	ucHeap
+ 113               		.comm	ucHeap,1500,1
+ 114               		.ident	"GCC: (GNU) 12.2.0"
+ 115               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 heap_1.c
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:2      *ABS*:000000000000003e __SP_H__
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:3      *ABS*:000000000000003d __SP_L__
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:4      *ABS*:000000000000003f __SREG__
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:5      *ABS*:0000000000000000 __tmp_reg__
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:6      *ABS*:0000000000000001 __zero_reg__
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:10     .text:0000000000000000 pvPortMalloc
+                             .bss:0000000000000000 pucAlignedHeap.0
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:109    .bss:0000000000000002 xNextFreeByte
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:111    .bss:0000000000000004 ucHeap
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:70     .text:0000000000000078 vPortFree
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:80     .text:000000000000007a vPortInitialiseBlocks
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:92     .text:0000000000000084 xPortGetFreeHeapSize
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:61     .text:000000000000006a .L7
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:52     .text:000000000000005a .L3
+C:\Users\win10\AppData\Local\Temp\ccuFfJn8.s:26     .text:000000000000001c .L2
+
+UNDEFINED SYMBOLS
+vTaskSuspendAll
+xTaskResumeAll
+__do_clear_bss

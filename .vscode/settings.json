@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+        "Makefile": "c",
+        "MakeFile": "makefile",
+        "freertos.h": "c",
+        "io.h": "c",
+        "portmacro.h": "c",
+        "timers.h": "c",
+        "stack_macros.h": "c",
+        "projdefs.h": "c",
+        "list.h": "c",
+        "queue.h": "c",
+        "task.h": "c",
+        "stream_buffer.h": "c",
+        "serial.h": "c",
+        "freertosconfig.h": "c",
+        "usart.h": "c",
+        "portable.h": "c",
+        "deprecated_definitions.h": "c",
+        "main.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "i:\\Evgeny\\Works\\avr\\AVR_328P\\FreeRTOS_328_p",
+            "binaryPath": "i:\\Evgeny\\Works\\avr\\AVR_328P\\FreeRTOS_328_p\\a.out",
+            "binaryArgs": []
+        }
+    ]
+}

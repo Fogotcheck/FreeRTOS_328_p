@@ -1,0 +1,449 @@
+   1               		.file	"port.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.global	pxPortInitialiseStack
+  10               	pxPortInitialiseStack:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 E82F      		mov r30,r24
+  16 0002 F92F      		mov r31,r25
+  17 0004 91E1      		ldi r25,lo8(17)
+  18 0006 9083      		st Z,r25
+  19 0008 DF01      		movw r26,r30
+  20 000a 1197      		sbiw r26,1
+  21 000c 82E2      		ldi r24,lo8(34)
+  22 000e 8C93      		st X,r24
+  23 0010 1197      		sbiw r26,1
+  24 0012 23E3      		ldi r18,lo8(51)
+  25 0014 2C93      		st X,r18
+  26 0016 1197      		sbiw r26,1
+  27 0018 6C93      		st X,r22
+  28 001a 1197      		sbiw r26,1
+  29 001c 7C93      		st X,r23
+  30 001e 1197      		sbiw r26,1
+  31 0020 1C92      		st X,__zero_reg__
+  32 0022 1197      		sbiw r26,1
+  33 0024 20E8      		ldi r18,lo8(-128)
+  34 0026 2C93      		st X,r18
+  35 0028 1197      		sbiw r26,1
+  36 002a 1C92      		st X,__zero_reg__
+  37 002c 1197      		sbiw r26,1
+  38 002e 22E0      		ldi r18,lo8(2)
+  39 0030 2C93      		st X,r18
+  40 0032 1197      		sbiw r26,1
+  41 0034 23E0      		ldi r18,lo8(3)
+  42 0036 2C93      		st X,r18
+  43 0038 1197      		sbiw r26,1
+  44 003a 24E0      		ldi r18,lo8(4)
+  45 003c 2C93      		st X,r18
+  46 003e 1197      		sbiw r26,1
+  47 0040 25E0      		ldi r18,lo8(5)
+  48 0042 2C93      		st X,r18
+  49 0044 1197      		sbiw r26,1
+  50 0046 26E0      		ldi r18,lo8(6)
+  51 0048 2C93      		st X,r18
+  52 004a 1197      		sbiw r26,1
+  53 004c 27E0      		ldi r18,lo8(7)
+  54 004e 2C93      		st X,r18
+  55 0050 1197      		sbiw r26,1
+  56 0052 28E0      		ldi r18,lo8(8)
+  57 0054 2C93      		st X,r18
+  58 0056 1197      		sbiw r26,1
+  59 0058 29E0      		ldi r18,lo8(9)
+  60 005a 2C93      		st X,r18
+  61 005c 1197      		sbiw r26,1
+  62 005e 20E1      		ldi r18,lo8(16)
+  63 0060 2C93      		st X,r18
+  64 0062 1197      		sbiw r26,1
+  65 0064 9C93      		st X,r25
+  66 0066 1197      		sbiw r26,1
+  67 0068 92E1      		ldi r25,lo8(18)
+  68 006a 9C93      		st X,r25
+  69 006c 1197      		sbiw r26,1
+  70 006e 93E1      		ldi r25,lo8(19)
+  71 0070 9C93      		st X,r25
+  72 0072 1197      		sbiw r26,1
+  73 0074 94E1      		ldi r25,lo8(20)
+  74 0076 9C93      		st X,r25
+  75 0078 1197      		sbiw r26,1
+  76 007a 95E1      		ldi r25,lo8(21)
+  77 007c 9C93      		st X,r25
+  78 007e 1197      		sbiw r26,1
+  79 0080 96E1      		ldi r25,lo8(22)
+  80 0082 9C93      		st X,r25
+  81 0084 1197      		sbiw r26,1
+  82 0086 97E1      		ldi r25,lo8(23)
+  83 0088 9C93      		st X,r25
+  84 008a 1197      		sbiw r26,1
+  85 008c 98E1      		ldi r25,lo8(24)
+  86 008e 9C93      		st X,r25
+  87 0090 1197      		sbiw r26,1
+  88 0092 99E1      		ldi r25,lo8(25)
+  89 0094 9C93      		st X,r25
+  90 0096 1197      		sbiw r26,1
+  91 0098 90E2      		ldi r25,lo8(32)
+  92 009a 9C93      		st X,r25
+  93 009c 1197      		sbiw r26,1
+  94 009e 91E2      		ldi r25,lo8(33)
+  95 00a0 9C93      		st X,r25
+  96 00a2 1197      		sbiw r26,1
+  97 00a4 8C93      		st X,r24
+  98 00a6 1197      		sbiw r26,1
+  99 00a8 83E2      		ldi r24,lo8(35)
+ 100 00aa 8C93      		st X,r24
+ 101 00ac 1197      		sbiw r26,1
+ 102 00ae 4C93      		st X,r20
+ 103 00b0 1197      		sbiw r26,1
+ 104 00b2 5C93      		st X,r21
+ 105 00b4 1197      		sbiw r26,1
+ 106 00b6 86E2      		ldi r24,lo8(38)
+ 107 00b8 8C93      		st X,r24
+ 108 00ba 1197      		sbiw r26,1
+ 109 00bc 87E2      		ldi r24,lo8(39)
+ 110 00be 8C93      		st X,r24
+ 111 00c0 1197      		sbiw r26,1
+ 112 00c2 88E2      		ldi r24,lo8(40)
+ 113 00c4 8C93      		st X,r24
+ 114 00c6 1197      		sbiw r26,1
+ 115 00c8 89E2      		ldi r24,lo8(41)
+ 116 00ca 8C93      		st X,r24
+ 117 00cc 1197      		sbiw r26,1
+ 118 00ce 80E3      		ldi r24,lo8(48)
+ 119 00d0 8C93      		st X,r24
+ 120 00d2 1197      		sbiw r26,1
+ 121 00d4 81E3      		ldi r24,lo8(49)
+ 122 00d6 8C93      		st X,r24
+ 123 00d8 CF01      		movw r24,r30
+ 124 00da 8697      		sbiw r24,38
+ 125               	/* epilogue start */
+ 126 00dc 0895      		ret
+ 128               	.global	xPortStartScheduler
+ 130               	xPortStartScheduler:
+ 131               	/* prologue: function */
+ 132               	/* frame size = 0 */
+ 133               	/* stack size = 0 */
+ 134               	.L__stack_usage = 0
+ 135 00de 15BC      		out 0x25,__zero_reg__
+ 136 00e0 14BC      		out 0x24,__zero_reg__
+ 137 00e2 84B5      		in r24,0x24
+ 138 00e4 8260      		ori r24,lo8(2)
+ 139 00e6 84BD      		out 0x24,r24
+ 140 00e8 EEE6      		ldi r30,lo8(110)
+ 141 00ea F0E0      		ldi r31,0
+ 142 00ec 8081      		ld r24,Z
+ 143 00ee 8260      		ori r24,lo8(2)
+ 144 00f0 8083      		st Z,r24
+ 145 00f2 89EF      		ldi r24,lo8(-7)
+ 146 00f4 87BD      		out 0x27,r24
+ 147 00f6 85B5      		in r24,0x25
+ 148 00f8 8160      		ori r24,lo8(1)
+ 149 00fa 85BD      		out 0x25,r24
+ 150 00fc 85B5      		in r24,0x25
+ 151 00fe 8260      		ori r24,lo8(2)
+ 152 0100 85BD      		out 0x25,r24
+ 153               	/* #APP */
+ 154               	 ;  304 "FreeRTOS\port.c" 1
+ 155 0102 A091 0000 		lds	r26, pxCurrentTCB		
+ 156 0106 B091 0000 		lds	r27, pxCurrentTCB + 1	
+ 157 010a CD91      		ld		r28, x+					
+ 158 010c CDBF      		out	__SP_L__, r28			
+ 159 010e DD91      		ld		r29, x+					
+ 160 0110 DEBF      		out	__SP_H__, r29			
+ 161 0112 FF91      		pop	r31						
+ 162 0114 EF91      		pop	r30						
+ 163 0116 DF91      		pop	r29						
+ 164 0118 CF91      		pop	r28						
+ 165 011a BF91      		pop	r27						
+ 166 011c AF91      		pop	r26						
+ 167 011e 9F91      		pop	r25						
+ 168 0120 8F91      		pop	r24						
+ 169 0122 7F91      		pop	r23						
+ 170 0124 6F91      		pop	r22						
+ 171 0126 5F91      		pop	r21						
+ 172 0128 4F91      		pop	r20						
+ 173 012a 3F91      		pop	r19						
+ 174 012c 2F91      		pop	r18						
+ 175 012e 1F91      		pop	r17						
+ 176 0130 0F91      		pop	r16						
+ 177 0132 FF90      		pop	r15						
+ 178 0134 EF90      		pop	r14						
+ 179 0136 DF90      		pop	r13						
+ 180 0138 CF90      		pop	r12						
+ 181 013a BF90      		pop	r11						
+ 182 013c AF90      		pop	r10						
+ 183 013e 9F90      		pop	r9						
+ 184 0140 8F90      		pop	r8						
+ 185 0142 7F90      		pop	r7						
+ 186 0144 6F90      		pop	r6						
+ 187 0146 5F90      		pop	r5						
+ 188 0148 4F90      		pop	r4						
+ 189 014a 3F90      		pop	r3						
+ 190 014c 2F90      		pop	r2						
+ 191 014e 1F90      		pop	r1						
+ 192 0150 0F90      		pop	r0						
+ 193 0152 0FBE      		out	__SREG__, r0			
+ 194 0154 0F90      		pop	r0						
+ 195               		
+ 196               	 ;  0 "" 2
+ 197               	 ;  308 "FreeRTOS\port.c" 1
+ 198 0156 0895      		ret
+ 199               	 ;  0 "" 2
+ 200               	/* #NOAPP */
+ 201 0158 81E0      		ldi r24,lo8(1)
+ 202               	/* epilogue start */
+ 203 015a 0895      		ret
+ 205               	.global	vPortEndScheduler
+ 207               	vPortEndScheduler:
+ 208               	/* prologue: function */
+ 209               	/* frame size = 0 */
+ 210               	/* stack size = 0 */
+ 211               	.L__stack_usage = 0
+ 212               	/* epilogue start */
+ 213 015c 0895      		ret
+ 215               	.global	vPortYield
+ 217               	vPortYield:
+ 218               	/* prologue: naked */
+ 219               	/* frame size = 0 */
+ 220               	/* stack size = 0 */
+ 221               	.L__stack_usage = 0
+ 222               	/* #APP */
+ 223               	 ;  329 "FreeRTOS\port.c" 1
+ 224 015e 0F92      		push	r0						
+ 225 0160 0FB6      		in		r0, __SREG__			
+ 226 0162 F894      		cli							
+ 227 0164 0F92      		push	r0						
+ 228 0166 1F92      		push	r1						
+ 229 0168 1124      		clr	r1						
+ 230 016a 2F92      		push	r2						
+ 231 016c 3F92      		push	r3						
+ 232 016e 4F92      		push	r4						
+ 233 0170 5F92      		push	r5						
+ 234 0172 6F92      		push	r6						
+ 235 0174 7F92      		push	r7						
+ 236 0176 8F92      		push	r8						
+ 237 0178 9F92      		push	r9						
+ 238 017a AF92      		push	r10						
+ 239 017c BF92      		push	r11						
+ 240 017e CF92      		push	r12						
+ 241 0180 DF92      		push	r13						
+ 242 0182 EF92      		push	r14						
+ 243 0184 FF92      		push	r15						
+ 244 0186 0F93      		push	r16						
+ 245 0188 1F93      		push	r17						
+ 246 018a 2F93      		push	r18						
+ 247 018c 3F93      		push	r19						
+ 248 018e 4F93      		push	r20						
+ 249 0190 5F93      		push	r21						
+ 250 0192 6F93      		push	r22						
+ 251 0194 7F93      		push	r23						
+ 252 0196 8F93      		push	r24						
+ 253 0198 9F93      		push	r25						
+ 254 019a AF93      		push	r26						
+ 255 019c BF93      		push	r27						
+ 256 019e CF93      		push	r28						
+ 257 01a0 DF93      		push	r29						
+ 258 01a2 EF93      		push	r30						
+ 259 01a4 FF93      		push	r31						
+ 260 01a6 A091 0000 		lds	r26, pxCurrentTCB		
+ 261 01aa B091 0000 		lds	r27, pxCurrentTCB + 1	
+ 262 01ae 0DB6      		in		r0, 0x3d				
+ 263 01b0 0D92      		st		x+, r0					
+ 264 01b2 0EB6      		in		r0, 0x3e				
+ 265 01b4 0D92      		st		x+, r0					
+ 266               		
+ 267               	 ;  0 "" 2
+ 268               	/* #NOAPP */
+ 269 01b6 0E94 0000 		call vTaskSwitchContext
+ 270               	/* #APP */
+ 271               	 ;  331 "FreeRTOS\port.c" 1
+ 272 01ba A091 0000 		lds	r26, pxCurrentTCB		
+ 273 01be B091 0000 		lds	r27, pxCurrentTCB + 1	
+ 274 01c2 CD91      		ld		r28, x+					
+ 275 01c4 CDBF      		out	__SP_L__, r28			
+ 276 01c6 DD91      		ld		r29, x+					
+ 277 01c8 DEBF      		out	__SP_H__, r29			
+ 278 01ca FF91      		pop	r31						
+ 279 01cc EF91      		pop	r30						
+ 280 01ce DF91      		pop	r29						
+ 281 01d0 CF91      		pop	r28						
+ 282 01d2 BF91      		pop	r27						
+ 283 01d4 AF91      		pop	r26						
+ 284 01d6 9F91      		pop	r25						
+ 285 01d8 8F91      		pop	r24						
+ 286 01da 7F91      		pop	r23						
+ 287 01dc 6F91      		pop	r22						
+ 288 01de 5F91      		pop	r21						
+ 289 01e0 4F91      		pop	r20						
+ 290 01e2 3F91      		pop	r19						
+ 291 01e4 2F91      		pop	r18						
+ 292 01e6 1F91      		pop	r17						
+ 293 01e8 0F91      		pop	r16						
+ 294 01ea FF90      		pop	r15						
+ 295 01ec EF90      		pop	r14						
+ 296 01ee DF90      		pop	r13						
+ 297 01f0 CF90      		pop	r12						
+ 298 01f2 BF90      		pop	r11						
+ 299 01f4 AF90      		pop	r10						
+ 300 01f6 9F90      		pop	r9						
+ 301 01f8 8F90      		pop	r8						
+ 302 01fa 7F90      		pop	r7						
+ 303 01fc 6F90      		pop	r6						
+ 304 01fe 5F90      		pop	r5						
+ 305 0200 4F90      		pop	r4						
+ 306 0202 3F90      		pop	r3						
+ 307 0204 2F90      		pop	r2						
+ 308 0206 1F90      		pop	r1						
+ 309 0208 0F90      		pop	r0						
+ 310 020a 0FBE      		out	__SREG__, r0			
+ 311 020c 0F90      		pop	r0						
+ 312               		
+ 313               	 ;  0 "" 2
+ 314               	 ;  333 "FreeRTOS\port.c" 1
+ 315 020e 0895      		ret
+ 316               	 ;  0 "" 2
+ 317               	/* #NOAPP */
+ 318               	/* epilogue start */
+ 320               	.global	vPortYieldFromTick
+ 322               	vPortYieldFromTick:
+ 323               	/* prologue: naked */
+ 324               	/* frame size = 0 */
+ 325               	/* stack size = 0 */
+ 326               	.L__stack_usage = 0
+ 327               	/* #APP */
+ 328               	 ;  346 "FreeRTOS\port.c" 1
+ 329 0210 0F92      		push	r0						
+ 330 0212 0FB6      		in		r0, __SREG__			
+ 331 0214 F894      		cli							
+ 332 0216 0F92      		push	r0						
+ 333 0218 1F92      		push	r1						
+ 334 021a 1124      		clr	r1						
+ 335 021c 2F92      		push	r2						
+ 336 021e 3F92      		push	r3						
+ 337 0220 4F92      		push	r4						
+ 338 0222 5F92      		push	r5						
+ 339 0224 6F92      		push	r6						
+ 340 0226 7F92      		push	r7						
+ 341 0228 8F92      		push	r8						
+ 342 022a 9F92      		push	r9						
+ 343 022c AF92      		push	r10						
+ 344 022e BF92      		push	r11						
+ 345 0230 CF92      		push	r12						
+ 346 0232 DF92      		push	r13						
+ 347 0234 EF92      		push	r14						
+ 348 0236 FF92      		push	r15						
+ 349 0238 0F93      		push	r16						
+ 350 023a 1F93      		push	r17						
+ 351 023c 2F93      		push	r18						
+ 352 023e 3F93      		push	r19						
+ 353 0240 4F93      		push	r20						
+ 354 0242 5F93      		push	r21						
+ 355 0244 6F93      		push	r22						
+ 356 0246 7F93      		push	r23						
+ 357 0248 8F93      		push	r24						
+ 358 024a 9F93      		push	r25						
+ 359 024c AF93      		push	r26						
+ 360 024e BF93      		push	r27						
+ 361 0250 CF93      		push	r28						
+ 362 0252 DF93      		push	r29						
+ 363 0254 EF93      		push	r30						
+ 364 0256 FF93      		push	r31						
+ 365 0258 A091 0000 		lds	r26, pxCurrentTCB		
+ 366 025c B091 0000 		lds	r27, pxCurrentTCB + 1	
+ 367 0260 0DB6      		in		r0, 0x3d				
+ 368 0262 0D92      		st		x+, r0					
+ 369 0264 0EB6      		in		r0, 0x3e				
+ 370 0266 0D92      		st		x+, r0					
+ 371               		
+ 372               	 ;  0 "" 2
+ 373               	/* #NOAPP */
+ 374 0268 0E94 0000 		call xTaskIncrementTick
+ 375 026c 8111      		cpse r24,__zero_reg__
+ 376 026e 0E94 0000 		call vTaskSwitchContext
+ 377               	.L6:
+ 378               	/* #APP */
+ 379               	 ;  351 "FreeRTOS\port.c" 1
+ 380 0272 A091 0000 		lds	r26, pxCurrentTCB		
+ 381 0276 B091 0000 		lds	r27, pxCurrentTCB + 1	
+ 382 027a CD91      		ld		r28, x+					
+ 383 027c CDBF      		out	__SP_L__, r28			
+ 384 027e DD91      		ld		r29, x+					
+ 385 0280 DEBF      		out	__SP_H__, r29			
+ 386 0282 FF91      		pop	r31						
+ 387 0284 EF91      		pop	r30						
+ 388 0286 DF91      		pop	r29						
+ 389 0288 CF91      		pop	r28						
+ 390 028a BF91      		pop	r27						
+ 391 028c AF91      		pop	r26						
+ 392 028e 9F91      		pop	r25						
+ 393 0290 8F91      		pop	r24						
+ 394 0292 7F91      		pop	r23						
+ 395 0294 6F91      		pop	r22						
+ 396 0296 5F91      		pop	r21						
+ 397 0298 4F91      		pop	r20						
+ 398 029a 3F91      		pop	r19						
+ 399 029c 2F91      		pop	r18						
+ 400 029e 1F91      		pop	r17						
+ 401 02a0 0F91      		pop	r16						
+ 402 02a2 FF90      		pop	r15						
+ 403 02a4 EF90      		pop	r14						
+ 404 02a6 DF90      		pop	r13						
+ 405 02a8 CF90      		pop	r12						
+ 406 02aa BF90      		pop	r11						
+ 407 02ac AF90      		pop	r10						
+ 408 02ae 9F90      		pop	r9						
+ 409 02b0 8F90      		pop	r8						
+ 410 02b2 7F90      		pop	r7						
+ 411 02b4 6F90      		pop	r6						
+ 412 02b6 5F90      		pop	r5						
+ 413 02b8 4F90      		pop	r4						
+ 414 02ba 3F90      		pop	r3						
+ 415 02bc 2F90      		pop	r2						
+ 416 02be 1F90      		pop	r1						
+ 417 02c0 0F90      		pop	r0						
+ 418 02c2 0FBE      		out	__SREG__, r0			
+ 419 02c4 0F90      		pop	r0						
+ 420               		
+ 421               	 ;  0 "" 2
+ 422               	 ;  353 "FreeRTOS\port.c" 1
+ 423 02c6 0895      		ret
+ 424               	 ;  0 "" 2
+ 425               	/* #NOAPP */
+ 426               	/* epilogue start */
+ 428               	.global	__vector_14
+ 430               	__vector_14:
+ 431               	/* prologue: naked */
+ 432               	/* frame size = 0 */
+ 433               	/* stack size = 0 */
+ 434               	.L__stack_usage = 0
+ 435 02c8 0E94 0000 		call vPortYieldFromTick
+ 436               	/* #APP */
+ 437               	 ;  414 "FreeRTOS\port.c" 1
+ 438 02cc 1895      		reti
+ 439               	 ;  0 "" 2
+ 440               	/* #NOAPP */
+ 441               	/* epilogue start */
+ 443               		.ident	"GCC: (GNU) 12.2.0"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 port.c
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:2      *ABS*:000000000000003e __SP_H__
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:3      *ABS*:000000000000003d __SP_L__
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:4      *ABS*:000000000000003f __SREG__
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:5      *ABS*:0000000000000000 __tmp_reg__
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:6      *ABS*:0000000000000001 __zero_reg__
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:10     .text:0000000000000000 pxPortInitialiseStack
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:130    .text:00000000000000de xPortStartScheduler
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:207    .text:000000000000015c vPortEndScheduler
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:217    .text:000000000000015e vPortYield
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:322    .text:0000000000000210 vPortYieldFromTick
+C:\Users\win10\AppData\Local\Temp\ccEMfS33.s:430    .text:00000000000002c8 __vector_14
+
+UNDEFINED SYMBOLS
+pxCurrentTCB
+vTaskSwitchContext
+xTaskIncrementTick

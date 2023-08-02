@@ -1,0 +1,131 @@
+   1               		.file	"main.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               		.section	.rodata.str1.1,"aMS",@progbits,1
+   9               	.LC0:
+  10 0000 4849 2046 		.string	"HI FUNC"
+  10      554E 4300 
+  11               		.text
+  13               	taskFunc:
+  14               	/* prologue: function */
+  15               	/* frame size = 0 */
+  16               	/* stack size = 0 */
+  17               	.L__stack_usage = 0
+  18               	.L2:
+  19 0000 0E94 0000 		call led_togle
+  20 0004 80E0      		ldi r24,lo8(.LC0)
+  21 0006 90E0      		ldi r25,hi8(.LC0)
+  22 0008 0E94 0000 		call puts
+  23 000c 88EE      		ldi r24,lo8(-24)
+  24 000e 93E0      		ldi r25,lo8(3)
+  25 0010 0E94 0000 		call vTaskDelay
+  26 0014 00C0      		rjmp .L2
+  28               		.section	.rodata.str1.1
+  29               	.LC1:
+  30 0008 4849 2046 		.string	"HI FOO"
+  30      4F4F 00
+  31               		.text
+  33               	taskFoo:
+  34               	/* prologue: function */
+  35               	/* frame size = 0 */
+  36               	/* stack size = 0 */
+  37               	.L__stack_usage = 0
+  38               	.L4:
+  39 0016 80E0      		ldi r24,lo8(.LC1)
+  40 0018 90E0      		ldi r25,hi8(.LC1)
+  41 001a 0E94 0000 		call puts
+  42 001e 84EF      		ldi r24,lo8(-12)
+  43 0020 91E0      		ldi r25,lo8(1)
+  44 0022 0E94 0000 		call vTaskDelay
+  45 0026 00C0      		rjmp .L4
+  47               	.global	vApplicationIdleHook
+  49               	vApplicationIdleHook:
+  50               	/* prologue: function */
+  51               	/* frame size = 0 */
+  52               	/* stack size = 0 */
+  53               	.L__stack_usage = 0
+  54               	/* epilogue start */
+  55 0028 0895      		ret
+  57               		.section	.rodata.str1.1
+  58               	.LC2:
+  59 000f 496E 6974 		.string	"Init end"
+  59      2065 6E64 
+  59      00
+  60               	.LC3:
+  61 0018 7461 736B 		.string	"taskFoo"
+  61      466F 6F00 
+  62               	.LC4:
+  63 0020 7461 736B 		.string	"taskFunc"
+  63      4675 6E63 
+  63      00
+  64               		.text
+  65               	.global	main
+  67               	main:
+  68               	/* prologue: function */
+  69               	/* frame size = 0 */
+  70               	/* stack size = 0 */
+  71               	.L__stack_usage = 0
+  72 002a 0E94 0000 		call led_init
+  73 002e 60E1      		ldi r22,lo8(16)
+  74 0030 70E0      		ldi r23,0
+  75 0032 80E0      		ldi r24,0
+  76 0034 90E0      		ldi r25,0
+  77 0036 0E94 0000 		call usart_init
+  78 003a 80E0      		ldi r24,lo8(.LC2)
+  79 003c 90E0      		ldi r25,hi8(.LC2)
+  80 003e 0E94 0000 		call puts
+  81 0042 E12C      		mov r14,__zero_reg__
+  82 0044 F12C      		mov r15,__zero_reg__
+  83 0046 04E0      		ldi r16,lo8(4)
+  84 0048 20E0      		ldi r18,0
+  85 004a 30E0      		ldi r19,0
+  86 004c 45E5      		ldi r20,lo8(85)
+  87 004e 50E0      		ldi r21,0
+  88 0050 60E0      		ldi r22,lo8(.LC3)
+  89 0052 70E0      		ldi r23,hi8(.LC3)
+  90 0054 80E0      		ldi r24,lo8(gs(taskFoo))
+  91 0056 90E0      		ldi r25,hi8(gs(taskFoo))
+  92 0058 0E94 0000 		call xTaskCreate
+  93 005c 03E0      		ldi r16,lo8(3)
+  94 005e 20E0      		ldi r18,0
+  95 0060 30E0      		ldi r19,0
+  96 0062 45E5      		ldi r20,lo8(85)
+  97 0064 50E0      		ldi r21,0
+  98 0066 60E0      		ldi r22,lo8(.LC4)
+  99 0068 70E0      		ldi r23,hi8(.LC4)
+ 100 006a 80E0      		ldi r24,lo8(gs(taskFunc))
+ 101 006c 90E0      		ldi r25,hi8(gs(taskFunc))
+ 102 006e 0E94 0000 		call xTaskCreate
+ 103 0072 0E94 0000 		call vTaskStartScheduler
+ 104               	.L7:
+ 105 0076 00C0      		rjmp .L7
+ 107               		.ident	"GCC: (GNU) 12.2.0"
+ 108               	.global __do_copy_data
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:2      *ABS*:000000000000003e __SP_H__
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:3      *ABS*:000000000000003d __SP_L__
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:4      *ABS*:000000000000003f __SREG__
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:5      *ABS*:0000000000000000 __tmp_reg__
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:6      *ABS*:0000000000000001 __zero_reg__
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:13     .text:0000000000000000 taskFunc
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:33     .text:0000000000000016 taskFoo
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:49     .text:0000000000000028 vApplicationIdleHook
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:67     .text:000000000000002a main
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:18     .text:0000000000000000 .L2
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:38     .text:0000000000000016 .L4
+C:\Users\win10\AppData\Local\Temp\ccGziLBi.s:104    .text:0000000000000076 .L7
+
+UNDEFINED SYMBOLS
+led_togle
+puts
+vTaskDelay
+led_init
+usart_init
+xTaskCreate
+vTaskStartScheduler
+__do_copy_data

@@ -1,0 +1,37 @@
+{
+    "tasks": [
+        {
+            "label": "Clean_project",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                "Clean_project"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build elf",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                "main.elf"
+            ],
+            "problemMatcher": []
+
+        },
+        {
+            "label": "Build all",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                "all"
+            ],
+            "problemMatcher": []
+
+        }
+    ],
+    "version": "2.0.0"
+}
